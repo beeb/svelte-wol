@@ -5,6 +5,7 @@ on:
 jobs:
   docker-deploy:
     runs-on: ubuntu-latest
+    environment: Docker
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
