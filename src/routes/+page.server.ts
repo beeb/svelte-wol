@@ -1,5 +1,6 @@
 import type { Actions, PageServerData, PageServerLoad } from './$types'
 import { invalid, error } from '@sveltejs/kit'
+import ping from 'ping'
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -18,7 +19,7 @@ export const actions: Actions = {
 	}
 }
 
-export const load: PageServerLoad = ({}): PageServerData => {
+export const load: PageServerLoad = async (): PageServerData => {
 	if (!import.meta.env.VITE_TARGET_IP) {
 		throw error(500, 'Please add VITE_TARGET_IP to your .env file')
 	}
@@ -28,6 +29,9 @@ export const load: PageServerLoad = ({}): PageServerData => {
 	if (import.meta.env.VITE_PASSPHRASE.length < 8) {
 		return error(500, 'Please make VITE_PASSPHRASE longer')
 	}
+
+	const online = await ping.promise.probe(import.meta.env.VITE_TARGET_IP, { timeout: 2 })
+
 	// TODO ping machine
-	return { online: false }
+	return { online }
 }
