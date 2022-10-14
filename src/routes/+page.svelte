@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css'
+	import { onMount } from 'svelte'
 	import type { ActionData, PageServerData } from './$types'
 	import { enhance } from '$app/forms'
 
@@ -9,12 +10,22 @@
 	let pass = ''
 
 	$: disabled = pass.length < 8 || data.online
+
+	onMount(() => {
+		const interval = setInterval(async () => {
+			const response = await fetch('/alive')
+			const result = await response.json()
+			console.log(result)
+			data.online = result.online
+		}, 2500)
+		return () => clearInterval(interval)
+	})
 </script>
 
 <div class="flex justify-center items-center min-h-screen min-w-screen p-8">
 	<div class="card flex flex-col w-full max-w-md p-6 gap-4">
 		<h1 class="text-2xl font-bold text-center">Remote Wake-on-LAN</h1>
-		{#if form?.success}
+		{#if form?.success && !data.online}
 			<div class="text-lg success p-2 rounded-lg text-center">
 				The request was sent. Please wait for the computer to wake up.
 			</div>
@@ -28,6 +39,9 @@
 				<div class="text-success">online</div>
 			{:else}
 				<div class="text-error">offline</div>
+				{#if form?.success}
+					<div class="loader" />
+				{/if}
 			{/if}
 		</div>
 		<form class="flex flex-col gap-4" method="post" use:enhance>
@@ -80,5 +94,24 @@
 	}
 	.text-success {
 		@apply text-[#40a02b];
+	}
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	.loader {
+		height: 1.2rem;
+		width: 1.2rem;
+		border-radius: 9999px;
+		border-width: 2px;
+		animation: spin 2s linear infinite;
+		border-top-color: transparent;
+		border-left-color: transparent;
+		border-bottom-color: #4c4f69;
+		border-right-color: #4c4f69;
 	}
 </style>
