@@ -1,5 +1,5 @@
-import type { Actions } from './$types'
-import { invalid } from '@sveltejs/kit'
+import type { Actions, PageServerData, PageServerLoad } from './$types'
+import { invalid, error } from '@sveltejs/kit'
 
 export const actions: Actions = {
 	default: async ({ request }) => {
@@ -16,4 +16,18 @@ export const actions: Actions = {
 		}
 		return invalid(403, { incorrect: true })
 	}
+}
+
+export const load: PageServerLoad = ({}): PageServerData => {
+	if (!import.meta.env.VITE_TARGET_IP) {
+		throw error(500, 'Please add VITE_TARGET_IP to your .env file')
+	}
+	if (!import.meta.env.VITE_PASSPHRASE) {
+		return error(500, 'Please add VITE_PASSPHRASE to your .env file')
+	}
+	if (import.meta.env.VITE_PASSPHRASE.length < 8) {
+		return error(500, 'Please make VITE_PASSPHRASE longer')
+	}
+	// TODO ping machine
+	return { online: false }
 }

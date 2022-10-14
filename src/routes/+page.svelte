@@ -1,13 +1,14 @@
 <script lang="ts">
 	import '../app.css'
-	import type { ActionData } from './$types'
+	import type { ActionData, PageServerData } from './$types'
 	import { enhance } from '$app/forms'
 
 	export let form: ActionData
+	export let data: PageServerData
 
 	let pass = ''
 
-	$: disabled = pass.length < 3
+	$: disabled = pass.length < 8
 </script>
 
 <div class="flex justify-center items-center min-h-screen min-w-screen p-8">
@@ -19,14 +20,15 @@
 			</div>
 		{/if}
 		{#if form?.missing}
-			<div class="text-lg error p-2 rounded-lg text-center">
-				Please add <span class="font-mono">VITE_PASSPHRASE</span> to .env
-			</div>
+			<div class="text-lg error p-2 rounded-lg text-center">Please make sure your .env file is correct.</div>
 		{/if}
 		<div class="flex items-center gap-4 text-lg">
 			<div>Device status:</div>
-			<div class="text-success">online</div>
-			<div class="text-error">offline</div>
+			{#if data.online}
+				<div class="text-success">online</div>
+			{:else}
+				<div class="text-error">offline</div>
+			{/if}
 		</div>
 		<form class="flex flex-col gap-4" method="post" use:enhance>
 			<div class="flex items-center gap-4 flex-wrap">
