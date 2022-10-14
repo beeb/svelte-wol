@@ -1,38 +1,52 @@
-# create-svelte
+# Remote Wake-on-LAN with Node.js and svelte-kit
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+[![Docker Release](https://github.com/beeb/svelte-wol/actions/workflows/docker.yml/badge.svg)](https://github.com/beeb/svelte-wol/actions/workflows/docker.yml)
 
-## Creating a project
+This Node.js application allows to connect to a web interface and trigger a magic packet that will wake another device
+on the network through its ethernet adapter.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Quick start
 
-```bash
-# create a new project in the current directory
-pnpm create svelte@latest
+The easiest is probably to use the provided [docker image](https://hub.docker.com/repository/docker/vbersier/svelte-wol).
+The image expects 3 environment variables to be present:
 
-# create a new project in my-app
-pnpm create svelte@latest my-app
+```shell
+$ export WOL_TARGET_IP=192.168.0.123
+$ export WOL_TARGET_MAC=00:00:00:00:00:00
+$ export WOL_PASSPHRASE=your_l0ng_but_easy_to_remember_passphrase
 ```
 
-## Developing
+The first is the local IP of the device to wake (for upstate monitoring). The second is the MAC address of the adapter
+that will receive the magic packet and needs to wake up. Finally, the last one is the passphrase that will allow
+anyone with access to the web interface to send this Wake-on-LAN command.
 
-Once you've created a project and installed dependencies with `pnpm install`, start a development server:
+Choose a password that is long and complex enough.
 
-```bash
-pnpm run dev
+### Example using `docker run`
 
-# or start the server and open the app in a new browser tab
-pnpm run dev -- --open
+`docker run -p 3000:3000 -d vbersier/svelte-wol:latest`
+
+### Example using docker-compose
+
+```yaml
+services:
+  wol:
+    image: vbersier/svelte-wol:latest
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      WOL_TARGET_IP: '192.168.0.123'
+      WOL_TARGET_MAC: 00:00:00:00:00:00
+      WOL_PASSPHRASE: your_l0ng_but_easy_to_remember_passphrase
 ```
 
-## Building
+## Accessing from the internet
 
-To create a production version of your app:
+This web interface is not automatically accessible through the internet. You could, for instance, forward port `3000` in
+your firewall to the device running `svelte-wol`, and then accessing it through its public IP.
 
-```bash
-pnpm run build
-```
+You could also use a dynDNS service to have a domain name always pointing to your device's public IP.
 
-You can preview the production build with `pnpm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Finally, you could use something like [Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/)
+to setup a permanent tunnel to your local webserver through a custom domain.
