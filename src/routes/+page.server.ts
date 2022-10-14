@@ -31,7 +31,6 @@ export const load: PageServerLoad = async (): PageServerData => {
 	}
 
 	const res = await ping.promise.probe(import.meta.env.VITE_TARGET_IP, { timeout: 2 })
-	console.log(res)
 
 	return { online: res.alive }
 }
