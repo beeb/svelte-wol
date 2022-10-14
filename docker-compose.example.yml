@@ -1,6 +1,6 @@
 services:
   wol:
-    image: vbersier/svelte-wol
+    image: vbersier/svelte-wol@latest
     restart: unless-stopped
     ports:
       - '3000:3000'
