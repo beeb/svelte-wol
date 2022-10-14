@@ -30,8 +30,8 @@ export const load: PageServerLoad = async (): PageServerData => {
 		return error(500, 'Please make VITE_PASSPHRASE longer')
 	}
 
-	const online = await ping.promise.probe(import.meta.env.VITE_TARGET_IP, { timeout: 2 })
+	const res = await ping.promise.probe(import.meta.env.VITE_TARGET_IP, { timeout: 2 })
+	console.log(res)
 
-	// TODO ping machine
-	return { online }
+	return { online: res.alive }
 }
