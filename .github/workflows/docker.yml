@@ -19,8 +19,6 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: vbersier/svelte-wol
-          tags: |
-            type=ref,event=push tag
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
