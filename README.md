@@ -24,7 +24,7 @@ Choose a password that is long and complex enough.
 
 ### Example using `docker run`
 
-`docker run --network="host" -p 3000:3000 -d vbersier/svelte-wol:latest`
+`docker run --network="host" -d vbersier/svelte-wol:latest`
 
 ### Example using docker-compose
 
@@ -33,9 +33,8 @@ services:
   wol:
     image: vbersier/svelte-wol:latest
     restart: unless-stopped
+    # host mode is needed for UDP broadcast
     network_mode: host
-    ports:
-      - '3000:3000'
     environment:
       WOL_TARGET_IP: '192.168.0.123'
       WOL_TARGET_MAC: 00:00:00:00:00:00
