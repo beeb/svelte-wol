@@ -1,0 +1,28 @@
+name: Docker Release
+on:
+  push:
+    tags: ['v*.*.*']
+jobs:
+  docker-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: vbersier/svelte-wol
+          tags: |
+            type=ref,event=push tag
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
