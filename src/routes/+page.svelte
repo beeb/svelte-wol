@@ -25,13 +25,16 @@
 <div class="flex justify-center items-center min-h-screen min-w-screen p-8">
 	<div class="card flex flex-col w-full max-w-md p-6 gap-4">
 		<h1 class="text-2xl font-bold text-center">Remote Wake-on-LAN</h1>
-		{#if form?.success && !data.online}
+		{#if form?.success === true && !data.online}
 			<div class="text-lg success p-2 rounded-lg text-center">
-				The request was sent. Please wait for the computer to wake up.
+				Magic packet was sent. Please wait for the computer to wake up.
 			</div>
 		{/if}
 		{#if form?.missing}
 			<div class="text-lg error p-2 rounded-lg text-center">Please make sure your .env file is correct.</div>
+		{/if}
+		{#if form?.success === false}
+			<div class="text-lg error p-2 rounded-lg text-center">Failed to send magic packet.</div>
 		{/if}
 		<div class="flex items-center gap-4 text-lg">
 			<div>Device status:</div>
