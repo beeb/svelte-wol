@@ -1,0 +1,11 @@
+services:
+  wol:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      WOL_TARGET_IP: '192.168.0.123'
+      WOL_TARGET_MAC: 00:00:00:00:00:00
+      WOL_PASSPHRASE: your_l0ng_but_easy_to_remember_passphrase
