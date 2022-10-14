@@ -8,7 +8,7 @@
 
 	let pass = ''
 
-	$: disabled = pass.length < 8
+	$: disabled = pass.length < 8 || data.online
 </script>
 
 <div class="flex justify-center items-center min-h-screen min-w-screen p-8">
@@ -38,6 +38,7 @@
 					type="password"
 					id="passphrase"
 					name="passphrase"
+					disabled={data.online}
 					bind:value={pass}
 				/>
 				{#if form?.incorrect}
