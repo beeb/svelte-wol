@@ -3,6 +3,8 @@
 	import { onMount } from 'svelte'
 	import type { ActionData, PageServerData } from './$types'
 	import { enhance } from '$app/forms'
+	import CheckLogo from 'virtual:icons/ri/checkbox-circle-line'
+	import CrossLogo from 'virtual:icons/ri/close-circle-line'
 
 	export let form: ActionData
 	export let data: PageServerData
@@ -39,9 +41,15 @@
 		<div class="flex items-center gap-4 text-lg">
 			<div>Device status:</div>
 			{#if data.online}
-				<div class="text-success">online</div>
+				<div class="text-success flex items-center gap-2">
+					<CheckLogo />
+					online
+				</div>
 			{:else}
-				<div class="text-error">offline</div>
+				<div class="text-error flex items-center gap-2">
+					<CrossLogo />
+					offline
+				</div>
 				{#if form?.success}
 					<div class="loader" />
 				{/if}
