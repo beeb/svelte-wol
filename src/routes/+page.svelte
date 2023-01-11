@@ -85,7 +85,7 @@
 	<title>Remote Wake-on-LAN</title>
 </svelte:head>
 
-<style>
+<style lang="postcss">
 	.card {
 		border-radius: 24px;
 		background: #dce0e8;
