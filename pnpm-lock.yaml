@@ -12,6 +12,7 @@ specifiers:
   eslint: ^8.31.0
   eslint-config-prettier: ^8.6.0
   eslint-plugin-svelte3: ^4.0.0
+  lru-cache: ^7.14.1
   ping: ^0.4.2
   postcss: ^8.4.21
   prettier: ^2.8.2
@@ -38,6 +39,7 @@ devDependencies:
   eslint: 8.31.0
   eslint-config-prettier: 8.6.0_eslint@8.31.0
   eslint-plugin-svelte3: 4.0.0_btuntbn75dxkba3nofpps2nvzm
+  lru-cache: 7.14.1
   ping: 0.4.2
   postcss: 8.4.21
   prettier: 2.8.2
@@ -1489,6 +1491,11 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: true
+
+  /lru-cache/7.14.1:
+    resolution: {integrity: sha512-ysxwsnTKdAx96aTRdhDOCQfDgbHnt8SK0KY8SEjO0wHinhWOFTESbjVCMPbU1uGXg/ch4lifqx0wfjOawU2+WA==}
+    engines: {node: '>=12'}
     dev: true
 
   /magic-string/0.25.9:
