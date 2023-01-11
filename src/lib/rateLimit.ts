@@ -13,7 +13,6 @@ export default function rateLimit(options?: Options) {
 
 	return {
 		check: (limit: number, token: string) => {
-			console.log(token)
 			const tokenCount = (tokenCache.get(token) as number[]) || [0]
 			if (tokenCount[0] === 0) {
 				tokenCache.set(token, tokenCount)
