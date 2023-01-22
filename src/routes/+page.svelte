@@ -24,7 +24,7 @@
 	})
 </script>
 
-<div class="flex justify-center items-center min-h-screen min-w-screen p-8">
+<div class="container flex justify-center items-center min-w-screen p-8">
 	<div class="card flex flex-col w-full max-w-md p-6 gap-4">
 		<h1 class="text-2xl font-bold text-center">Remote Wake-on-LAN</h1>
 		{#if form?.success === true && !data.online}
@@ -86,6 +86,10 @@
 </svelte:head>
 
 <style lang="postcss">
+	.container {
+		min-height: 100vh;
+		min-height: 100dvh;
+	}
 	.card {
 		border-radius: 24px;
 		background: #dce0e8;
