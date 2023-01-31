@@ -24,19 +24,19 @@
 	})
 </script>
 
-<div class="flex justify-center items-center min-h-screen min-w-screen p-8">
-	<div class="card flex flex-col w-full max-w-md p-6 gap-4">
-		<h1 class="text-2xl font-bold text-center">Remote Wake-on-LAN</h1>
+<div class="min-w-screen flex min-h-screen items-center justify-center p-8">
+	<div class="card flex w-full max-w-md flex-col gap-4 p-6">
+		<h1 class="text-center text-2xl font-bold">Remote Wake-on-LAN</h1>
 		{#if form?.success === true && !data.online}
-			<div class="text-lg success p-2 rounded-lg text-center">
+			<div class="success rounded-lg p-2 text-center text-lg">
 				Magic packet was sent. Please wait for the computer to wake up.
 			</div>
 		{/if}
 		{#if form?.missing}
-			<div class="text-lg error p-2 rounded-lg text-center">Please make sure your .env file is correct.</div>
+			<div class="error rounded-lg p-2 text-center text-lg">Please make sure your .env file is correct.</div>
 		{/if}
 		{#if form?.success === false}
-			<div class="text-lg error p-2 rounded-lg text-center">Failed to send magic packet.</div>
+			<div class="error rounded-lg p-2 text-center text-lg">Failed to send magic packet.</div>
 		{/if}
 		<div class="flex items-center gap-4 text-lg">
 			<div>Device status:</div>
@@ -56,10 +56,10 @@
 			{/if}
 		</div>
 		<form class="flex flex-col gap-4" method="post" use:enhance>
-			<div class="flex items-center gap-4 flex-wrap">
+			<div class="flex flex-wrap items-center gap-4">
 				<label class="text-lg" class:text-error={form?.incorrect} for="passphrase">Passphrase:</label>
 				<input
-					class={`grow rounded-lg text-lg p-2 border border-slate-300 ${form?.incorrect ? 'border-[#d20f39]' : ''}`}
+					class={`grow rounded-lg border border-slate-300 p-2 text-lg ${form?.incorrect ? 'border-[#d20f39]' : ''}`}
 					type="password"
 					id="passphrase"
 					name="passphrase"
@@ -72,7 +72,7 @@
 			</div>
 			<div class="flex justify-center">
 				<button
-					class="primary p-3 rounded-lg text-lg uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+					class="primary rounded-lg p-3 text-lg uppercase disabled:cursor-not-allowed disabled:opacity-50"
 					type="submit"
 					{disabled}>Wake up!</button
 				>
