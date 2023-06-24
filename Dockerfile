@@ -1,4 +1,4 @@
-FROM node:16 as builder-base
+FROM node:18 as builder-base
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
@@ -7,7 +7,7 @@ COPY . ./
 RUN pnpm install
 RUN pnpm run build
 
-FROM node:16-alpine
+FROM node:18-alpine
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 

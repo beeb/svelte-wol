@@ -1,6 +1,6 @@
-import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 import type { RequestHandler } from './$types'
+import { error, json } from '@sveltejs/kit'
 import ping from 'ping'
 
 export const GET: RequestHandler = async () => {

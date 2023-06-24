@@ -1,6 +1,6 @@
-import type { Actions, PageServerData, PageServerLoad } from './$types'
-import { fail, error } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
+import type { Actions, PageServerData, PageServerLoad } from './$types'
+import { error, fail } from '@sveltejs/kit'
 import ping from 'ping'
 import wol from 'wol'
 
@@ -24,7 +24,7 @@ export const actions: Actions = {
 			return fail(500, { success: false })
 		}
 		return fail(403, { incorrect: true })
-	}
+	},
 }
 
 export const load: PageServerLoad = async (): PageServerData => {
