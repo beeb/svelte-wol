@@ -19,9 +19,7 @@
                 nodePackages.pnpm
               ];
               dotenv.enable = true;
-              languages.javascript = {
-                enable = true;
-              };
+              languages.javascript.enable = true;
               languages.typescript.enable = true;
             })
           ];
