@@ -1,5 +1,5 @@
-import rateLimit from './lib/rateLimit'
 import type { Handle } from '@sveltejs/kit'
+import rateLimit from './lib/rateLimit'
 
 const limiter = rateLimit({
 	interval: 60 * 1000, // usage period is 1 minute

@@ -1,0 +1,32 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.1.2/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"formatter": {
+		"enabled": true,
+		"lineWidth": 120
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"semicolons": "asNeeded"
+		}
+	},
+	"linter": {
+		"enabled": true
+	},
+	"files": {
+		"ignore": [
+			".vercel/*",
+			"src/i18n/*",
+			".svelte-kit/*",
+			"node_modules/*",
+			"build/*",
+			".env",
+			".env.*",
+			"pnpm-lock.yaml",
+			"src/app.d.ts"
+		]
+	}
+}

@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/private'
-import type { RequestHandler } from './$types'
 import { error, json } from '@sveltejs/kit'
 import ping from 'ping'
+import type { RequestHandler } from './$types'
 
 export const GET: RequestHandler = async () => {
 	if (!env.WOL_TARGET_IP) {

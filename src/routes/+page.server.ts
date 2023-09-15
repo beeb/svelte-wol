@@ -1,8 +1,8 @@
 import { env } from '$env/dynamic/private'
-import type { Actions, PageServerData, PageServerLoad } from './$types'
 import { error, fail } from '@sveltejs/kit'
 import ping from 'ping'
 import wol from 'wol'
+import type { Actions, PageServerData, PageServerLoad } from './$types'
 
 export const actions: Actions = {
 	default: async ({ request }) => {
