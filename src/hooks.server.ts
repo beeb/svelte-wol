@@ -1,4 +1,3 @@
-import type { Handle } from '@sveltejs/kit'
 import rateLimit from './lib/rateLimit'
 
 const limiter = rateLimit({
@@ -6,7 +5,7 @@ const limiter = rateLimit({
 	uniqueTokenPerInterval: 500, // max 500 distinct IPs (to avoid using too much memory)
 })
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle = async ({ event, resolve }) => {
 	// limit to 100 requests per minute
 	const { isRateLimited, limit, remaining } = limiter.check(100, event.getClientAddress())
 	let response = new Response('rate limited')

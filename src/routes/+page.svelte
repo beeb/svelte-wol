@@ -1,13 +1,12 @@
 <script lang="ts">
   import '../app.css'
   import { onMount } from 'svelte'
-  import type { ActionData, PageServerData } from './$types'
   import { enhance } from '$app/forms'
   import CheckLogo from 'virtual:icons/ri/checkbox-circle-line'
   import CrossLogo from 'virtual:icons/ri/close-circle-line'
 
-  export let form: ActionData
-  export let data: PageServerData
+  export let form
+  export let data
 
   let pass = ''
 

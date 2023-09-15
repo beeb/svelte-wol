@@ -2,9 +2,8 @@ import { env } from '$env/dynamic/private'
 import { error, fail } from '@sveltejs/kit'
 import ping from 'ping'
 import wol from 'wol'
-import type { Actions, PageServerData, PageServerLoad } from './$types'
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ request }) => {
 		if (!env.WOL_PASSPHRASE) {
 			return fail(500, { missing: true })
@@ -27,7 +26,7 @@ export const actions: Actions = {
 	},
 }
 
-export const load: PageServerLoad = async (): PageServerData => {
+export const load = async () => {
 	if (!env.WOL_TARGET_IP) {
 		throw error(500, 'Please add WOL_TARGET_IP to your .env file')
 	}

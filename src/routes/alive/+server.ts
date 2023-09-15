@@ -1,9 +1,8 @@
 import { env } from '$env/dynamic/private'
 import { error, json } from '@sveltejs/kit'
 import ping from 'ping'
-import type { RequestHandler } from './$types'
 
-export const GET: RequestHandler = async () => {
+export const GET = async () => {
 	if (!env.WOL_TARGET_IP) {
 		throw error(500, 'Please add WOL_TARGET_IP to your .env file')
 	}
